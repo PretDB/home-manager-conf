@@ -1,0 +1,2022 @@
+#compdef easytier-cli
+
+autoload -U is-at-least
+
+_easytier-cli() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-p+[the instance name]:RPC_PORTAL:_default' \
+'--rpc-portal=[the instance name]:RPC_PORTAL:_default' \
+'-o+[output format]:OUTPUT_FORMAT:(table json)' \
+'--output=[output format]:OUTPUT_FORMAT:(table json)' \
+'-v[verbose output]' \
+'--verbose[verbose output]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_easytier-cli_commands" \
+"*::: :->easytier-cli" \
+&& ret=0
+    case $state in
+    (easytier-cli)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-command-$line[1]:"
+        case $line[1] in
+            (peer)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__peer_commands" \
+"*::: :->peer" \
+&& ret=0
+
+    case $state in
+    (peer)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-peer-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list-foreign)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list-global-foreign)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__peer__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-peer-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list-foreign)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list-global-foreign)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(connector)
+_arguments "${_arguments_options[@]}" : \
+'-i+[]:IPV4:_default' \
+'--ipv4=[]:IPV4:_default' \
+'*-p+[]:PEERS:_default' \
+'*--peers=[]:PEERS:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__connector_commands" \
+"*::: :->connector" \
+&& ret=0
+
+    case $state in
+    (connector)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-connector-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__connector__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-connector-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(mapped-listener)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__mapped-listener_commands" \
+"*::: :->mapped-listener" \
+&& ret=0
+
+    case $state in
+    (mapped-listener)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-mapped-listener-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':url:_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':url:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__mapped-listener__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-mapped-listener-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(stun)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(route)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__route_commands" \
+"*::: :->route" \
+&& ret=0
+
+    case $state in
+    (route)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-route-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(dump)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__route__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-route-help-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(dump)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(peer-center)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(vpn-portal)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(node)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__node_commands" \
+"*::: :->node" \
+&& ret=0
+
+    case $state in
+    (node)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-node-command-$line[1]:"
+        case $line[1] in
+            (info)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__node__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-node-help-command-$line[1]:"
+        case $line[1] in
+            (info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(service)
+_arguments "${_arguments_options[@]}" : \
+'-n+[service name]:NAME:_default' \
+'--name=[service name]:NAME:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__service_commands" \
+"*::: :->service" \
+&& ret=0
+
+    case $state in
+    (service)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-service-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" : \
+'--description=[service description]:DESCRIPTION:_default' \
+'--display-name=[]:DISPLAY_NAME:_default' \
+'--disable-autostart=[]:DISABLE_AUTOSTART:(true false)' \
+'--disable-restart-on-failure=[]:DISABLE_RESTART_ON_FAILURE:(true false)' \
+'--core-path=[path to easytier-core binary]:CORE_PATH:_files' \
+'--service-work-dir=[]:SERVICE_WORK_DIR:_files' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::core_args -- args to pass to easytier-core:_default' \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(start)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(stop)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__service__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-service-help-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(stop)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(proxy)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(acl)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__acl_commands" \
+"*::: :->acl" \
+&& ret=0
+
+    case $state in
+    (acl)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-acl-command-$line[1]:"
+        case $line[1] in
+            (stats)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__acl__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-acl-help-command-$line[1]:"
+        case $line[1] in
+            (stats)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(port-forward)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__port-forward_commands" \
+"*::: :->port-forward" \
+&& ret=0
+
+    case $state in
+    (port-forward)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-port-forward-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':protocol -- Protocol (tcp/udp):_default' \
+':bind_addr -- Local bind address (e.g., 0.0.0.0\:8080):_default' \
+':dst_addr -- Destination address (e.g., 10.1.1.1\:80):_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':protocol -- Protocol (tcp/udp):_default' \
+':bind_addr -- Local bind address (e.g., 0.0.0.0\:8080):_default' \
+'::dst_addr -- Optional Destination address (e.g., 10.1.1.1\:80):_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__port-forward__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-port-forward-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(whitelist)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__whitelist_commands" \
+"*::: :->whitelist" \
+&& ret=0
+
+    case $state in
+    (whitelist)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-whitelist-command-$line[1]:"
+        case $line[1] in
+            (set-tcp)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':ports -- TCP ports (e.g., 80,443,8000-9000):_default' \
+&& ret=0
+;;
+(set-udp)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':ports -- UDP ports (e.g., 53,5000-6000):_default' \
+&& ret=0
+;;
+(clear-tcp)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(clear-udp)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__whitelist__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-whitelist-help-command-$line[1]:"
+        case $line[1] in
+            (set-tcp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set-udp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear-tcp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear-udp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(stats)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_easytier-cli__stats_commands" \
+"*::: :->stats" \
+&& ret=0
+
+    case $state in
+    (stats)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-stats-command-$line[1]:"
+        case $line[1] in
+            (show)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(prometheus)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__stats__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-stats-help-command-$line[1]:"
+        case $line[1] in
+            (show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prometheus)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(gen-autocomplete)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-command-$line[1]:"
+        case $line[1] in
+            (peer)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__peer_commands" \
+"*::: :->peer" \
+&& ret=0
+
+    case $state in
+    (peer)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-peer-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list-foreign)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list-global-foreign)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(connector)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__connector_commands" \
+"*::: :->connector" \
+&& ret=0
+
+    case $state in
+    (connector)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-connector-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(mapped-listener)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__mapped-listener_commands" \
+"*::: :->mapped-listener" \
+&& ret=0
+
+    case $state in
+    (mapped-listener)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-mapped-listener-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(stun)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(route)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__route_commands" \
+"*::: :->route" \
+&& ret=0
+
+    case $state in
+    (route)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-route-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(dump)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(peer-center)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(vpn-portal)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(node)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__node_commands" \
+"*::: :->node" \
+&& ret=0
+
+    case $state in
+    (node)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-node-command-$line[1]:"
+        case $line[1] in
+            (info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(service)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__service_commands" \
+"*::: :->service" \
+&& ret=0
+
+    case $state in
+    (service)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-service-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(uninstall)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(stop)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(proxy)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(acl)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__acl_commands" \
+"*::: :->acl" \
+&& ret=0
+
+    case $state in
+    (acl)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-acl-command-$line[1]:"
+        case $line[1] in
+            (stats)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(port-forward)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__port-forward_commands" \
+"*::: :->port-forward" \
+&& ret=0
+
+    case $state in
+    (port-forward)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-port-forward-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(whitelist)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__whitelist_commands" \
+"*::: :->whitelist" \
+&& ret=0
+
+    case $state in
+    (whitelist)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-whitelist-command-$line[1]:"
+        case $line[1] in
+            (set-tcp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set-udp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear-tcp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear-udp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(stats)
+_arguments "${_arguments_options[@]}" : \
+":: :_easytier-cli__help__stats_commands" \
+"*::: :->stats" \
+&& ret=0
+
+    case $state in
+    (stats)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:easytier-cli-help-stats-command-$line[1]:"
+        case $line[1] in
+            (show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prometheus)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(gen-autocomplete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_easytier-cli_commands] )) ||
+_easytier-cli_commands() {
+    local commands; commands=(
+'peer:show peers info' \
+'connector:manage connectors' \
+'mapped-listener:manage mapped listeners' \
+'stun:do stun test' \
+'route:show route info' \
+'peer-center:show global peers info' \
+'vpn-portal:show vpn portal (wireguard) info' \
+'node:inspect self easytier-core status' \
+'service:manage easytier-core as a system service' \
+'proxy:show tcp/kcp proxy status' \
+'acl:show ACL rules statistics' \
+'port-forward:manage port forwarding' \
+'whitelist:manage TCP/UDP whitelist' \
+'stats:show statistics information' \
+'gen-autocomplete:生成 shell 补全脚本' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli commands' commands "$@"
+}
+(( $+functions[_easytier-cli__acl_commands] )) ||
+_easytier-cli__acl_commands() {
+    local commands; commands=(
+'stats:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli acl commands' commands "$@"
+}
+(( $+functions[_easytier-cli__acl__help_commands] )) ||
+_easytier-cli__acl__help_commands() {
+    local commands; commands=(
+'stats:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli acl help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__acl__help__help_commands] )) ||
+_easytier-cli__acl__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli acl help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__acl__help__stats_commands] )) ||
+_easytier-cli__acl__help__stats_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli acl help stats commands' commands "$@"
+}
+(( $+functions[_easytier-cli__acl__stats_commands] )) ||
+_easytier-cli__acl__stats_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli acl stats commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector_commands] )) ||
+_easytier-cli__connector_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli connector commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__add_commands] )) ||
+_easytier-cli__connector__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__help_commands] )) ||
+_easytier-cli__connector__help_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli connector help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__help__add_commands] )) ||
+_easytier-cli__connector__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector help add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__help__help_commands] )) ||
+_easytier-cli__connector__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__help__list_commands] )) ||
+_easytier-cli__connector__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector help list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__help__remove_commands] )) ||
+_easytier-cli__connector__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector help remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__list_commands] )) ||
+_easytier-cli__connector__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__connector__remove_commands] )) ||
+_easytier-cli__connector__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli connector remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__gen-autocomplete_commands] )) ||
+_easytier-cli__gen-autocomplete_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli gen-autocomplete commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help_commands] )) ||
+_easytier-cli__help_commands() {
+    local commands; commands=(
+'peer:show peers info' \
+'connector:manage connectors' \
+'mapped-listener:manage mapped listeners' \
+'stun:do stun test' \
+'route:show route info' \
+'peer-center:show global peers info' \
+'vpn-portal:show vpn portal (wireguard) info' \
+'node:inspect self easytier-core status' \
+'service:manage easytier-core as a system service' \
+'proxy:show tcp/kcp proxy status' \
+'acl:show ACL rules statistics' \
+'port-forward:manage port forwarding' \
+'whitelist:manage TCP/UDP whitelist' \
+'stats:show statistics information' \
+'gen-autocomplete:生成 shell 补全脚本' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__acl_commands] )) ||
+_easytier-cli__help__acl_commands() {
+    local commands; commands=(
+'stats:' \
+    )
+    _describe -t commands 'easytier-cli help acl commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__acl__stats_commands] )) ||
+_easytier-cli__help__acl__stats_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help acl stats commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__connector_commands] )) ||
+_easytier-cli__help__connector_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+    )
+    _describe -t commands 'easytier-cli help connector commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__connector__add_commands] )) ||
+_easytier-cli__help__connector__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help connector add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__connector__list_commands] )) ||
+_easytier-cli__help__connector__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help connector list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__connector__remove_commands] )) ||
+_easytier-cli__help__connector__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help connector remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__gen-autocomplete_commands] )) ||
+_easytier-cli__help__gen-autocomplete_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help gen-autocomplete commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__help_commands] )) ||
+_easytier-cli__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__mapped-listener_commands] )) ||
+_easytier-cli__help__mapped-listener_commands() {
+    local commands; commands=(
+'add:Add Mapped Listerner' \
+'remove:Remove Mapped Listener' \
+'list:List Existing Mapped Listener' \
+    )
+    _describe -t commands 'easytier-cli help mapped-listener commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__mapped-listener__add_commands] )) ||
+_easytier-cli__help__mapped-listener__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help mapped-listener add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__mapped-listener__list_commands] )) ||
+_easytier-cli__help__mapped-listener__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help mapped-listener list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__mapped-listener__remove_commands] )) ||
+_easytier-cli__help__mapped-listener__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help mapped-listener remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__node_commands] )) ||
+_easytier-cli__help__node_commands() {
+    local commands; commands=(
+'info:show node info' \
+'config:show node config' \
+    )
+    _describe -t commands 'easytier-cli help node commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__node__config_commands] )) ||
+_easytier-cli__help__node__config_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help node config commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__node__info_commands] )) ||
+_easytier-cli__help__node__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help node info commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer_commands] )) ||
+_easytier-cli__help__peer_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+'list-foreign:' \
+'list-global-foreign:' \
+    )
+    _describe -t commands 'easytier-cli help peer commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer__add_commands] )) ||
+_easytier-cli__help__peer__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer__list_commands] )) ||
+_easytier-cli__help__peer__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer__list-foreign_commands] )) ||
+_easytier-cli__help__peer__list-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer list-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer__list-global-foreign_commands] )) ||
+_easytier-cli__help__peer__list-global-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer list-global-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer__remove_commands] )) ||
+_easytier-cli__help__peer__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__peer-center_commands] )) ||
+_easytier-cli__help__peer-center_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help peer-center commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__port-forward_commands] )) ||
+_easytier-cli__help__port-forward_commands() {
+    local commands; commands=(
+'add:Add port forward rule' \
+'remove:Remove port forward rule' \
+'list:List port forward rules' \
+    )
+    _describe -t commands 'easytier-cli help port-forward commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__port-forward__add_commands] )) ||
+_easytier-cli__help__port-forward__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help port-forward add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__port-forward__list_commands] )) ||
+_easytier-cli__help__port-forward__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help port-forward list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__port-forward__remove_commands] )) ||
+_easytier-cli__help__port-forward__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help port-forward remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__proxy_commands] )) ||
+_easytier-cli__help__proxy_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help proxy commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__route_commands] )) ||
+_easytier-cli__help__route_commands() {
+    local commands; commands=(
+'list:' \
+'dump:' \
+    )
+    _describe -t commands 'easytier-cli help route commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__route__dump_commands] )) ||
+_easytier-cli__help__route__dump_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help route dump commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__route__list_commands] )) ||
+_easytier-cli__help__route__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help route list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service_commands] )) ||
+_easytier-cli__help__service_commands() {
+    local commands; commands=(
+'install:register easytier-core as a system service' \
+'uninstall:unregister easytier-core system service' \
+'status:check easytier-core system service status' \
+'start:start easytier-core system service' \
+'stop:stop easytier-core system service' \
+    )
+    _describe -t commands 'easytier-cli help service commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service__install_commands] )) ||
+_easytier-cli__help__service__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help service install commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service__start_commands] )) ||
+_easytier-cli__help__service__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help service start commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service__status_commands] )) ||
+_easytier-cli__help__service__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help service status commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service__stop_commands] )) ||
+_easytier-cli__help__service__stop_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help service stop commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__service__uninstall_commands] )) ||
+_easytier-cli__help__service__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help service uninstall commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__stats_commands] )) ||
+_easytier-cli__help__stats_commands() {
+    local commands; commands=(
+'show:Show general statistics' \
+'prometheus:Show statistics in Prometheus format' \
+    )
+    _describe -t commands 'easytier-cli help stats commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__stats__prometheus_commands] )) ||
+_easytier-cli__help__stats__prometheus_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help stats prometheus commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__stats__show_commands] )) ||
+_easytier-cli__help__stats__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help stats show commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__stun_commands] )) ||
+_easytier-cli__help__stun_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help stun commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__vpn-portal_commands] )) ||
+_easytier-cli__help__vpn-portal_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help vpn-portal commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist_commands] )) ||
+_easytier-cli__help__whitelist_commands() {
+    local commands; commands=(
+'set-tcp:Set TCP port whitelist' \
+'set-udp:Set UDP port whitelist' \
+'clear-tcp:Clear TCP whitelist' \
+'clear-udp:Clear UDP whitelist' \
+'show:Show current whitelist configuration' \
+    )
+    _describe -t commands 'easytier-cli help whitelist commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist__clear-tcp_commands] )) ||
+_easytier-cli__help__whitelist__clear-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help whitelist clear-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist__clear-udp_commands] )) ||
+_easytier-cli__help__whitelist__clear-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help whitelist clear-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist__set-tcp_commands] )) ||
+_easytier-cli__help__whitelist__set-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help whitelist set-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist__set-udp_commands] )) ||
+_easytier-cli__help__whitelist__set-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help whitelist set-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__help__whitelist__show_commands] )) ||
+_easytier-cli__help__whitelist__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli help whitelist show commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener_commands] )) ||
+_easytier-cli__mapped-listener_commands() {
+    local commands; commands=(
+'add:Add Mapped Listerner' \
+'remove:Remove Mapped Listener' \
+'list:List Existing Mapped Listener' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli mapped-listener commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__add_commands] )) ||
+_easytier-cli__mapped-listener__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__help_commands] )) ||
+_easytier-cli__mapped-listener__help_commands() {
+    local commands; commands=(
+'add:Add Mapped Listerner' \
+'remove:Remove Mapped Listener' \
+'list:List Existing Mapped Listener' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli mapped-listener help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__help__add_commands] )) ||
+_easytier-cli__mapped-listener__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener help add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__help__help_commands] )) ||
+_easytier-cli__mapped-listener__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__help__list_commands] )) ||
+_easytier-cli__mapped-listener__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener help list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__help__remove_commands] )) ||
+_easytier-cli__mapped-listener__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener help remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__list_commands] )) ||
+_easytier-cli__mapped-listener__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__mapped-listener__remove_commands] )) ||
+_easytier-cli__mapped-listener__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli mapped-listener remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node_commands] )) ||
+_easytier-cli__node_commands() {
+    local commands; commands=(
+'info:show node info' \
+'config:show node config' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli node commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__config_commands] )) ||
+_easytier-cli__node__config_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli node config commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__help_commands] )) ||
+_easytier-cli__node__help_commands() {
+    local commands; commands=(
+'info:show node info' \
+'config:show node config' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli node help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__help__config_commands] )) ||
+_easytier-cli__node__help__config_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli node help config commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__help__help_commands] )) ||
+_easytier-cli__node__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli node help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__help__info_commands] )) ||
+_easytier-cli__node__help__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli node help info commands' commands "$@"
+}
+(( $+functions[_easytier-cli__node__info_commands] )) ||
+_easytier-cli__node__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli node info commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer_commands] )) ||
+_easytier-cli__peer_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+'list-foreign:' \
+'list-global-foreign:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli peer commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__add_commands] )) ||
+_easytier-cli__peer__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help_commands] )) ||
+_easytier-cli__peer__help_commands() {
+    local commands; commands=(
+'add:' \
+'remove:' \
+'list:' \
+'list-foreign:' \
+'list-global-foreign:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli peer help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__add_commands] )) ||
+_easytier-cli__peer__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__help_commands] )) ||
+_easytier-cli__peer__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__list_commands] )) ||
+_easytier-cli__peer__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__list-foreign_commands] )) ||
+_easytier-cli__peer__help__list-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help list-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__list-global-foreign_commands] )) ||
+_easytier-cli__peer__help__list-global-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help list-global-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__help__remove_commands] )) ||
+_easytier-cli__peer__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer help remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__list_commands] )) ||
+_easytier-cli__peer__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__list-foreign_commands] )) ||
+_easytier-cli__peer__list-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer list-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__list-global-foreign_commands] )) ||
+_easytier-cli__peer__list-global-foreign_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer list-global-foreign commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer__remove_commands] )) ||
+_easytier-cli__peer__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__peer-center_commands] )) ||
+_easytier-cli__peer-center_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli peer-center commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward_commands] )) ||
+_easytier-cli__port-forward_commands() {
+    local commands; commands=(
+'add:Add port forward rule' \
+'remove:Remove port forward rule' \
+'list:List port forward rules' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli port-forward commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__add_commands] )) ||
+_easytier-cli__port-forward__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__help_commands] )) ||
+_easytier-cli__port-forward__help_commands() {
+    local commands; commands=(
+'add:Add port forward rule' \
+'remove:Remove port forward rule' \
+'list:List port forward rules' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli port-forward help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__help__add_commands] )) ||
+_easytier-cli__port-forward__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward help add commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__help__help_commands] )) ||
+_easytier-cli__port-forward__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__help__list_commands] )) ||
+_easytier-cli__port-forward__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward help list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__help__remove_commands] )) ||
+_easytier-cli__port-forward__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward help remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__list_commands] )) ||
+_easytier-cli__port-forward__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__port-forward__remove_commands] )) ||
+_easytier-cli__port-forward__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli port-forward remove commands' commands "$@"
+}
+(( $+functions[_easytier-cli__proxy_commands] )) ||
+_easytier-cli__proxy_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli proxy commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route_commands] )) ||
+_easytier-cli__route_commands() {
+    local commands; commands=(
+'list:' \
+'dump:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli route commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__dump_commands] )) ||
+_easytier-cli__route__dump_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli route dump commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__help_commands] )) ||
+_easytier-cli__route__help_commands() {
+    local commands; commands=(
+'list:' \
+'dump:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli route help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__help__dump_commands] )) ||
+_easytier-cli__route__help__dump_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli route help dump commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__help__help_commands] )) ||
+_easytier-cli__route__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli route help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__help__list_commands] )) ||
+_easytier-cli__route__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli route help list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__route__list_commands] )) ||
+_easytier-cli__route__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli route list commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service_commands] )) ||
+_easytier-cli__service_commands() {
+    local commands; commands=(
+'install:register easytier-core as a system service' \
+'uninstall:unregister easytier-core system service' \
+'status:check easytier-core system service status' \
+'start:start easytier-core system service' \
+'stop:stop easytier-core system service' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli service commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help_commands] )) ||
+_easytier-cli__service__help_commands() {
+    local commands; commands=(
+'install:register easytier-core as a system service' \
+'uninstall:unregister easytier-core system service' \
+'status:check easytier-core system service status' \
+'start:start easytier-core system service' \
+'stop:stop easytier-core system service' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli service help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__help_commands] )) ||
+_easytier-cli__service__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__install_commands] )) ||
+_easytier-cli__service__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help install commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__start_commands] )) ||
+_easytier-cli__service__help__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help start commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__status_commands] )) ||
+_easytier-cli__service__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help status commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__stop_commands] )) ||
+_easytier-cli__service__help__stop_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help stop commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__help__uninstall_commands] )) ||
+_easytier-cli__service__help__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service help uninstall commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__install_commands] )) ||
+_easytier-cli__service__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service install commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__start_commands] )) ||
+_easytier-cli__service__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service start commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__status_commands] )) ||
+_easytier-cli__service__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service status commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__stop_commands] )) ||
+_easytier-cli__service__stop_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service stop commands' commands "$@"
+}
+(( $+functions[_easytier-cli__service__uninstall_commands] )) ||
+_easytier-cli__service__uninstall_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli service uninstall commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats_commands] )) ||
+_easytier-cli__stats_commands() {
+    local commands; commands=(
+'show:Show general statistics' \
+'prometheus:Show statistics in Prometheus format' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli stats commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__help_commands] )) ||
+_easytier-cli__stats__help_commands() {
+    local commands; commands=(
+'show:Show general statistics' \
+'prometheus:Show statistics in Prometheus format' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli stats help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__help__help_commands] )) ||
+_easytier-cli__stats__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stats help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__help__prometheus_commands] )) ||
+_easytier-cli__stats__help__prometheus_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stats help prometheus commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__help__show_commands] )) ||
+_easytier-cli__stats__help__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stats help show commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__prometheus_commands] )) ||
+_easytier-cli__stats__prometheus_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stats prometheus commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stats__show_commands] )) ||
+_easytier-cli__stats__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stats show commands' commands "$@"
+}
+(( $+functions[_easytier-cli__stun_commands] )) ||
+_easytier-cli__stun_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli stun commands' commands "$@"
+}
+(( $+functions[_easytier-cli__vpn-portal_commands] )) ||
+_easytier-cli__vpn-portal_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli vpn-portal commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist_commands] )) ||
+_easytier-cli__whitelist_commands() {
+    local commands; commands=(
+'set-tcp:Set TCP port whitelist' \
+'set-udp:Set UDP port whitelist' \
+'clear-tcp:Clear TCP whitelist' \
+'clear-udp:Clear UDP whitelist' \
+'show:Show current whitelist configuration' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli whitelist commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__clear-tcp_commands] )) ||
+_easytier-cli__whitelist__clear-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist clear-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__clear-udp_commands] )) ||
+_easytier-cli__whitelist__clear-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist clear-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help_commands] )) ||
+_easytier-cli__whitelist__help_commands() {
+    local commands; commands=(
+'set-tcp:Set TCP port whitelist' \
+'set-udp:Set UDP port whitelist' \
+'clear-tcp:Clear TCP whitelist' \
+'clear-udp:Clear UDP whitelist' \
+'show:Show current whitelist configuration' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'easytier-cli whitelist help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__clear-tcp_commands] )) ||
+_easytier-cli__whitelist__help__clear-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help clear-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__clear-udp_commands] )) ||
+_easytier-cli__whitelist__help__clear-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help clear-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__help_commands] )) ||
+_easytier-cli__whitelist__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help help commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__set-tcp_commands] )) ||
+_easytier-cli__whitelist__help__set-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help set-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__set-udp_commands] )) ||
+_easytier-cli__whitelist__help__set-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help set-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__help__show_commands] )) ||
+_easytier-cli__whitelist__help__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist help show commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__set-tcp_commands] )) ||
+_easytier-cli__whitelist__set-tcp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist set-tcp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__set-udp_commands] )) ||
+_easytier-cli__whitelist__set-udp_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist set-udp commands' commands "$@"
+}
+(( $+functions[_easytier-cli__whitelist__show_commands] )) ||
+_easytier-cli__whitelist__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'easytier-cli whitelist show commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_easytier-cli" ]; then
+    _easytier-cli "$@"
+else
+    compdef _easytier-cli easytier-cli
+fi
