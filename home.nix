@@ -17,7 +17,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -40,21 +40,24 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    # amule
     aria2
     bat
     bison
     btop
-    chromium
+    # chromium
     clang-tools
+    cloc
     cmake
-    conan
+    # conan
     cowsay
     cppcheck
     delta
     dhcpdump
-    dina-font
+    # dina-font
     distrobox
     dnsutils  # `dig` + `nslookup`
+    dotnet-sdk
     doxygen_gui
     ethtool
     fd
@@ -65,7 +68,6 @@
     flameshot
     flex
     fzf # A command-line fuzzy finder
-    fzf-zsh
     gawk
     git-lfs
     glow # markdown previewer in terminal
@@ -96,7 +98,7 @@
     mplus-outline-fonts.githubRelease
     mtr
     multimarkdown
-    mycli
+    # mycli
     ncurses5
     neofetch
     # neovim
@@ -111,8 +113,8 @@
     nodenv
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
-    # obs-studio
+    noto-fonts-color-emoji
+    obs-studio
     oh-my-zsh
     p7zip
     patchelf
@@ -125,7 +127,7 @@
     pods
     postman
     # proggyfonts
-    # proxychains-ng
+    proxychains
     python312
     python312Packages.jedi
     python312Packages.pip
@@ -134,6 +136,7 @@
     readline
     realvnc-vnc-viewer
     ripgrep
+    ruby
     rustup
     sarasa-gothic
     simplescreenrecorder
@@ -142,8 +145,9 @@
     source-han-sans
     source-han-serif
     sshfs
-    steam-run
+    # steam-run
     strace
+    sqlite
     sysstat
     tcpdump
     tree
@@ -152,6 +156,7 @@
     unixtools.xxd
     unzip
     usbutils
+    uv
     vcpkg
     vlc
     # vscode
@@ -203,8 +208,31 @@
 
     git = {
       enable = true;
-      userName = "Hong Nan";
-      userEmail = "nan.hong@greatdb.com";
+      settings = {
+        core = {
+          pager = "delta";
+        };
+        delta = {
+          navigate = true;
+          features = "zebra-dark";
+          line-numbers = true;
+          side-by-side = true;
+          keep-plus-minus-mark = true;
+        };
+        diff = {
+          colorMoved = true;
+        };
+        interactive = {
+          diffFilter = "delta --color-only";
+        };
+        merge = {
+          conflictstyle = "diff3";
+        };
+        user = {
+          name = "PretDB";
+          email = "pret-db@pret-page.com";
+        };
+      };
     };
 
     # Let Home Manager install and manage itself.
@@ -308,7 +336,8 @@ unbind C-h
       keyMode = "vi";
       mouse = false;
       prefix = "C-b";
-      shell = "${pkgs.zsh}/bin/zsh";
+      #shell = "${pkgs.zsh}/bin/zsh";
+      shell = "/usr/bin/zsh";
       terminal = "tmux-256-color";
     };
 
@@ -327,14 +356,12 @@ unbind C-h
       '';
       defaultKeymap = "vicmd";
 
+      # [NOTE] this field seems to be useless.
       envExtra = ''
         SILICONFLOW_API_KEY="sk-vwacmoxntfytmglrmesxghsfsprwzlhmysozdretqqpxnrnm"
         TAVILY_API_KEY="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"
         TIMER_FORMAT='[%d]'
 	      TIMER_PRECISION=3
-
-        ZBOX_USER=hongnan
-        ZBOX_PASSW=hongnan97
       '';
 
       history = {
@@ -349,6 +376,7 @@ unbind C-h
       };
 
       initContent = ''
+        source ~/.nix-profile/etc/profile.d/nix.sh
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
