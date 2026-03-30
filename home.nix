@@ -1,9 +1,14 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
     # ./fcitx5
-  ]; 
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -56,7 +61,7 @@
     dhcpdump
     # dina-font
     distrobox
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
     dotnet-sdk
     doxygen_gui
     ethtool
@@ -80,9 +85,10 @@
     hugo # static site generator
     iftop # network monitoring
     iotop # io monitoring
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
     iperf3
     jq # A lightweight and flexible command-line JSON processor
+    # kitty
     lazygit
     lazyjournal
     ldns # replacement of `dig`, it provide the command `drill`
@@ -117,6 +123,7 @@
     obs-studio
     oh-my-zsh
     p7zip
+    pandoc
     patchelf
     pciutils
     podman
@@ -133,6 +140,39 @@
     python312Packages.pip
     python312Packages.pylint
     python312Packages.pylint-venv
+
+    python312Packages.beautifulsoup4
+    python312Packages.click
+    python312Packages.configargparse
+    python312Packages.django
+    python312Packages.fastapi
+    python312Packages.flask
+    python312Packages.ipython
+    python312Packages.isort
+    python312Packages.jinja2
+    python312Packages.jupyter
+    python312Packages.matplotlib
+    python312Packages.numpy
+    python312Packages.opencv4
+    python312Packages.pandas
+    python312Packages.pillow
+    python312Packages.pygame
+    python312Packages.pymysql
+    python312Packages.pypandoc
+    python312Packages.pytest
+    python312Packages.torch
+    python312Packages.pyyaml
+    python312Packages.requests
+    python312Packages.seaborn
+    python312Packages.scipy
+    python312Packages.scrapy
+    python312Packages.sqlalchemy
+    python312Packages.sqlite-utils
+    python312Packages.sympy
+    python312Packages.typer
+    python312Packages.tqdm
+    python312Packages.wxpython
+
     readline
     realvnc-vnc-viewer
     ripgrep
@@ -144,10 +184,11 @@
     source-han-mono
     source-han-sans
     source-han-serif
+    sqlite
+    sqlite-web
     sshfs
     # steam-run
     strace
-    sqlite
     sysstat
     tcpdump
     tree
@@ -196,7 +237,10 @@
 
     firefox = {
       enable = true;
-      languagePacks = [ "en-US" "zh-CN" ];
+      languagePacks = [
+        "en-US"
+        "zh-CN"
+      ];
       package = pkgs.firefox-esr;
     };
 
@@ -240,6 +284,19 @@
       enable = true;
     };
 
+    # kitty = {
+    #   enable = true;
+    #   settings = {
+    #     confirm_os_window_close = 1;
+    #     dynamic_background_opacity = true;
+    #     enable_audio_bell = false;
+    #     mouse_hide_wait = "-1.0";
+    #     window_padding_width = 10;
+    #     # background_opacity = "0.5";
+    #     # background_blur = 5;
+    #   };
+    # };
+
     neovim = {
       enable = true;
       viAlias = true;
@@ -252,83 +309,83 @@
       baseIndex = 1;
       clock24 = true;
       extraConfig = ''
-# 开启 RGB 颜色支持（必须）
-set -g default-terminal "tmux-256color"
-set -ga terminal-overrides ",xterm-kitty:RGB"
-set -ga terminal-overrides ",*256col*:Tc"
-# 让 Tmux 允许传递包含图形的控制序列
-set -ga terminal-overrides ",*:Ss=\\E[%p1%d q:Se=\\E[2 q"
-set-environment -g COLORTERM "truecolor"
-set -gq allow-passthrough on
-set -g visual-activity off
+        # 开启 RGB 颜色支持（必须）
+        set -g default-terminal "tmux-256color"
+        set -ga terminal-overrides ",xterm-kitty:RGB"
+        set -ga terminal-overrides ",*256col*:Tc"
+        # 让 Tmux 允许传递包含图形的控制序列
+        set -ga terminal-overrides ",*:Ss=\\E[%p1%d q:Se=\\E[2 q"
+        set-environment -g COLORTERM "truecolor"
+        set -gq allow-passthrough on
+        set -g visual-activity off
 
-set -q -g status-utf8 on
-setw -q -g utf8 on
+        set -q -g status-utf8 on
+        setw -q -g utf8 on
 
-# if you're running tmux within iTerm2
-#   - and tmux is 1.9 or 1.9a
-#   - and iTerm2 is configured to let option key act as +Esc
-#   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
-# then uncomment the following line to make Meta + arrow keys mapping work
-#set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
+        # if you're running tmux within iTerm2
+        #   - and tmux is 1.9 or 1.9a
+        #   - and iTerm2 is configured to let option key act as +Esc
+        #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
+        # then uncomment the following line to make Meta + arrow keys mapping work
+        #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
 
-# -- display -------------------------------------------------------------------
+        # -- display -------------------------------------------------------------------
 
-set -g base-index 1           # start windows numbering at 1
-setw -g pane-base-index 1     # make pane numbering consistent with windows
+        set -g base-index 1           # start windows numbering at 1
+        setw -g pane-base-index 1     # make pane numbering consistent with windows
 
-setw -g automatic-rename on   # rename window to reflect current program
-set -g renumber-windows on    # renumber windows when a window is closed
+        setw -g automatic-rename on   # rename window to reflect current program
+        set -g renumber-windows on    # renumber windows when a window is closed
 
-set -g set-titles on          # set terminal title
+        set -g set-titles on          # set terminal title
 
-set -g display-panes-time 800 # slightly longer pane indicators display time
-set -g display-time 1000      # slightly longer status messages display time
+        set -g display-panes-time 800 # slightly longer pane indicators display time
+        set -g display-time 1000      # slightly longer status messages display time
 
-set -g status-interval 10     # redraw status line every 10 seconds
+        set -g status-interval 10     # redraw status line every 10 seconds
 
-# clear both screen and history
-# bind -n C-l send-keys C-l \; run 'sleep 0.1' \; clear-history
+        # clear both screen and history
+        # bind -n C-l send-keys C-l \; run 'sleep 0.1' \; clear-history
 
-# activity
-set -g monitor-activity on
-set -g visual-activity off
+        # activity
+        set -g monitor-activity on
+        set -g visual-activity off
 
 
-# -- navigation ----------------------------------------------------------------
+        # -- navigation ----------------------------------------------------------------
 
-# create session
-bind C-c new-session
+        # create session
+        bind C-c new-session
 
-# find session
-bind C-f command-prompt -p find-session 'switch-client -t %%'
+        # find session
+        bind C-f command-prompt -p find-session 'switch-client -t %%'
 
-# split current window horizontally
-bind - split-window -v
-# split current window vertically
-bind | split-window -h
+        # split current window horizontally
+        bind - split-window -v
+        # split current window vertically
+        bind | split-window -h
 
-# pane navigation
-bind h select-pane -L  # move left
-bind j select-pane -D  # move down
-bind k select-pane -U  # move up
-bind l select-pane -R  # move right
-bind > swap-pane -D       # swap current pane with the next one
-bind < swap-pane -U       # swap current pane with the previous one
+        # pane navigation
+        bind h select-pane -L  # move left
+        bind j select-pane -D  # move down
+        bind k select-pane -U  # move up
+        bind l select-pane -R  # move right
+        bind > swap-pane -D       # swap current pane with the next one
+        bind < swap-pane -U       # swap current pane with the previous one
 
-# pane resizing
-bind -r H resize-pane -L 2
-bind -r J resize-pane -D 2
-bind -r K resize-pane -U 2
-bind -r L resize-pane -R 2
+        # pane resizing
+        bind -r H resize-pane -L 2
+        bind -r J resize-pane -D 2
+        bind -r K resize-pane -U 2
+        bind -r L resize-pane -R 2
 
-# window navigation
-unbind n
-unbind p
-# bind-key -n C-h send-keys C-h  # select previous window
-# bind-key -n C-l send-keys C-l     # select next window
-unbind C-h
-# bind Tab last-window        # move to last active window
+        # window navigation
+        unbind n
+        unbind p
+        # bind-key -n C-h send-keys C-h  # select previous window
+        # bind-key -n C-l send-keys C-l     # select next window
+        unbind C-h
+        # bind Tab last-window        # move to last active window
 
       '';
       escapeTime = 10;
@@ -340,7 +397,6 @@ unbind C-h
       shell = "/usr/bin/zsh";
       terminal = "tmux-256-color";
     };
-
 
     zsh = {
       enable = true;
@@ -358,10 +414,10 @@ unbind C-h
 
       # [NOTE] this field seems to be useless.
       envExtra = ''
-        SILICONFLOW_API_KEY="sk-vwacmoxntfytmglrmesxghsfsprwzlhmysozdretqqpxnrnm"
-        TAVILY_API_KEY="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"
-        TIMER_FORMAT='[%d]'
-	      TIMER_PRECISION=3
+                SILICONFLOW_API_KEY="sk-vwacmoxntfytmglrmesxghsfsprwzlhmysozdretqqpxnrnm"
+                TAVILY_API_KEY="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"
+                TIMER_FORMAT='[%d]'
+        	      TIMER_PRECISION=3
       '';
 
       history = {
@@ -395,49 +451,49 @@ unbind C-h
       oh-my-zsh = {
         enable = true;
         plugins = [
-	        "branch"
-	        "bundler"
-	        "catimg"
-	        "colored-man-pages"
-	        "colorize"
-	        "command-not-found"
-	        "conda"
-	        "copybuffer"
-	        "cp"
-	        "dirhistory"
-	        "docker"
-	        "docker-compose"
-	        "emoji"
-	        "emoji-clock"
-	        "encode64"
-	        "extract"
-	        "fzf"
-          "git"         # also requires `programs.git.enable = true;`
-	        "git-auto-fetch"
-	        "git-escape-magic"
-	        "git-extras"
-	        "gitfast"
-	        "git-flow"
-	        "git-flow-avh"
-	        "github"
-	        "git-hubflow"
-	        "git-lfs"
-	        "gitignore"
-	        "git-prompt"
-	        "gradle"
-	        "history"
-	        "history-substring-search"
-	        "httpie"
-	        "kate"
-	        "kops"
-	        "kubectl"
-	        "kube-ps1"
-	        "man"
-	        "mvn"
-	        "nmap"
-	        "node"
-	        "npm"
-	        "nvm"
+          "branch"
+          "bundler"
+          "catimg"
+          "colored-man-pages"
+          "colorize"
+          "command-not-found"
+          "conda"
+          "copybuffer"
+          "cp"
+          "dirhistory"
+          "docker"
+          "docker-compose"
+          "emoji"
+          "emoji-clock"
+          "encode64"
+          "extract"
+          "fzf"
+          "git" # also requires `programs.git.enable = true;`
+          "git-auto-fetch"
+          "git-escape-magic"
+          "git-extras"
+          "gitfast"
+          "git-flow"
+          "git-flow-avh"
+          "github"
+          "git-hubflow"
+          "git-lfs"
+          "gitignore"
+          "git-prompt"
+          "gradle"
+          "history"
+          "history-substring-search"
+          "httpie"
+          "kate"
+          "kops"
+          "kubectl"
+          "kube-ps1"
+          "man"
+          "mvn"
+          "nmap"
+          "node"
+          "npm"
+          "nvm"
           "pip"
           "python"
           "ruby"
@@ -466,13 +522,13 @@ unbind C-h
       #   '';
 
       setOptions = [
-	      "EXTENDED_HISTORY"
+        "EXTENDED_HISTORY"
         "HIST_IGNORE_ALL_DUPS"
       ];
       shellAliases = {
-        ls="ls --color -lh";
-	      less="less -RX";
-        icat="kitty +kitten icat";
+        ls = "ls --color -lh";
+        less = "less -RX";
+        icat = "kitty +kitten icat";
       };
 
       syntaxHighlighting.enable = true;
@@ -484,7 +540,6 @@ unbind C-h
     defaultCacheTtl = 1800;
     enableSshSupport = true;
   };
-
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
