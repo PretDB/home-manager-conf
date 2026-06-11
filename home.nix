@@ -54,7 +54,7 @@
     clang-tools
     cloc
     cmake
-    # conan
+    conda
     cowsay
     cppcheck
     delta
@@ -94,6 +94,7 @@
     ldns # replacement of `dig`, it provide the command `drill`
     libaio
     liberation_ttf
+    libz
     lm_sensors # for `sensors` command
     lsof # list open files
     ltrace
@@ -101,6 +102,7 @@
     lua51Packages.lua
     lua51Packages.luarocks-nix
     mermaid-cli
+    micromamba
     mplus-outline-fonts.githubRelease
     mtr
     multimarkdown
@@ -110,7 +112,7 @@
     # neovim
     nerd-fonts.droid-sans-mono
     nerd-fonts.fira-code
-    ninja
+    # ninja
     nix-index
     nix-output-monitor
     nix-update
@@ -135,43 +137,48 @@
     postman
     # proggyfonts
     proxychains
-    python312
-    python312Packages.jedi
-    python312Packages.pip
-    python312Packages.pylint
-    python312Packages.pylint-venv
+    (python312.withPackages (
+      python-pkgs: with python-pkgs; [
+        pandas
+        requests
+        jedi
+        pip
+        pylint
+        pylint-venv
 
-    python312Packages.beautifulsoup4
-    python312Packages.click
-    python312Packages.configargparse
-    python312Packages.django
-    python312Packages.fastapi
-    python312Packages.flask
-    python312Packages.ipython
-    python312Packages.isort
-    python312Packages.jinja2
-    python312Packages.jupyter
-    python312Packages.matplotlib
-    python312Packages.numpy
-    python312Packages.opencv4
-    python312Packages.pandas
-    python312Packages.pillow
-    python312Packages.pygame
-    python312Packages.pymysql
-    python312Packages.pypandoc
-    python312Packages.pytest
-    python312Packages.torch
-    python312Packages.pyyaml
-    python312Packages.requests
-    python312Packages.seaborn
-    python312Packages.scipy
-    python312Packages.scrapy
-    python312Packages.sqlalchemy
-    python312Packages.sqlite-utils
-    python312Packages.sympy
-    python312Packages.typer
-    python312Packages.tqdm
-    python312Packages.wxpython
+        beautifulsoup4
+        click
+        configargparse
+        django
+        fastapi
+        flask
+        ipython
+        isort
+        jinja2
+        jupyter
+        matplotlib
+        numpy
+        opencv4
+        pandas
+        pillow
+        pygame
+        pymysql
+        pypandoc
+        pytest
+        torch
+        pyyaml
+        requests
+        seaborn
+        scipy
+        scrapy
+        sqlalchemy
+        sqlite-utils
+        sympy
+        typer
+        tqdm
+        wxpython
+      ]
+    ))
 
     readline
     realvnc-vnc-viewer
@@ -188,6 +195,7 @@
     sqlite-web
     sshfs
     # steam-run
+    stdenv.cc.cc.lib
     strace
     sysstat
     tcpdump
@@ -209,6 +217,7 @@
     xz
     yq-go
     zip
+    # zlib
     zsh-powerlevel10k
     zstd
   ];
@@ -235,14 +244,14 @@
       enable = true;
     };
 
-    firefox = {
-      enable = true;
-      languagePacks = [
-        "en-US"
-        "zh-CN"
-      ];
-      package = pkgs.firefox-esr;
-    };
+    # firefox = {
+    #   enable = true;
+    #   languagePacks = [
+    #     "en-US"
+    #     "zh-CN"
+    #   ];
+    #   package = pkgs.firefox-esr;
+    # };
 
     fzf = {
       enable = true;
@@ -568,5 +577,10 @@
     # GLFW_IM_MODULE      = "ibus";
     # # SDL_IM_MODULE       = "";
     # XMODIFIERS          = "@im=fcitx";
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${
+      pkgs.lib.makeLibraryPath [ pkgs.libz ]
+    }:\$LD_LIBRARY_PATH";
+    # LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath buildInputs}:\$LD_LIBRARY_PATH";
+    # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib.outPath}/lib:\$LD_LIBRARY_PATH";
   };
 }
