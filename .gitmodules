@@ -1,6 +1,3 @@
-[submodule "nvim"]
-	path = nvim
-	url = https://github.com/pretdb/nvim-conf
 [submodule "fcitx5/share/moqi"]
 	path = fcitx5/share/moqi
 	url = https://github.com/gaboolic/rime-shuangpin-fuzhuma.git

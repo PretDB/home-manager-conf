@@ -22,7 +22,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -45,33 +45,14 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    # amule
-    aria2
     bat
-    bison
-    btop
-    # chromium
-    clang-tools
     cloc
-    cmake
-    conda
-    cowsay
-    cppcheck
     delta
-    dhcpdump
-    # dina-font
-    distrobox
     dnsutils # `dig` + `nslookup`
     dotnet-sdk
-    doxygen_gui
-    ethtool
+    # doxygen_gui
     fd
-    # feishu
     file
-    fira-code-symbols
-    # fira-code-nerdfont
-    flameshot
-    flex
     fzf # A command-line fuzzy finder
     gawk
     git-lfs
@@ -81,139 +62,34 @@
     gnused
     gnutar
     go
-    htop
     hugo # static site generator
-    iftop # network monitoring
     iotop # io monitoring
     ipcalc # it is a calculator for the IPv4/v6 addresses
-    iperf3
     jq # A lightweight and flexible command-line JSON processor
-    # kitty
     lazygit
-    lazyjournal
     ldns # replacement of `dig`, it provide the command `drill`
-    libaio
-    liberation_ttf
-    libz
-    lm_sensors # for `sensors` command
     lsof # list open files
-    ltrace
     lua-language-server
     lua51Packages.lua
     lua51Packages.luarocks-nix
-    mermaid-cli
-    micromamba
-    mplus-outline-fonts.githubRelease
-    mtr
     multimarkdown
-    # mycli
     ncurses5
-    neofetch
-    # neovim
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.fira-code
-    # ninja
     nix-index
     nix-output-monitor
     nix-update
-    nmap
     nnn
-    nodenv
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    obs-studio
     oh-my-zsh
     p7zip
     pandoc
-    patchelf
-    pciutils
-    podman
-    podman-bootc
-    podman-compose
-    podman-desktop
-    podman-tui
-    pods
-    postman
-    # proggyfonts
-    proxychains
-    (python312.withPackages (
-      python-pkgs: with python-pkgs; [
-        pandas
-        requests
-        jedi
-        pip
-        pylint
-        pylint-venv
-
-        beautifulsoup4
-        click
-        configargparse
-        django
-        fastapi
-        flask
-        ipython
-        isort
-        jinja2
-        jupyter
-        matplotlib
-        numpy
-        opencv4
-        pandas
-        pillow
-        pygame
-        pymysql
-        pypandoc
-        pytest
-        torch
-        pyyaml
-        requests
-        seaborn
-        scipy
-        scrapy
-        sqlalchemy
-        sqlite-utils
-        sympy
-        typer
-        tqdm
-        wxpython
-      ]
-    ))
-
-    readline
-    realvnc-vnc-viewer
     ripgrep
-    ruby
-    rustup
-    sarasa-gothic
-    simplescreenrecorder
-    socat
-    source-han-mono
-    source-han-sans
-    source-han-serif
     sqlite
-    sqlite-web
-    sshfs
-    # steam-run
-    stdenv.cc.cc.lib
-    strace
-    sysstat
-    tcpdump
     tree
     tree-sitter
     universal-ctags
     unixtools.xxd
     unzip
-    usbutils
     uv
-    vcpkg
-    vlc
-    # vscode
     which
-    wireshark
-    # wpsoffice-cn
-    wqy_microhei
-    wqy_zenhei
     xz
     yq-go
     zip
@@ -225,6 +101,8 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".p10k.zsh".source = ./.p10k.zsh;
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -239,9 +117,21 @@
 
   fonts.fontconfig.enable = true; # Allow fontconfig to discover fonts in home.packages
 
+  # LazyVim config: only source-controlled files, not lazy-lock.json
+  xdg.configFile = {
+    "nvim/init.lua".source = ./nvim/init.lua;
+    "nvim/lua".source = ./nvim/lua;
+    "nvim/lazyvim.json".source = ./nvim/lazyvim.json;
+    "nvim/.neoconf.json".source = ./nvim/.neoconf.json;
+    "nvim/stylua.toml".source = ./nvim/stylua.toml;
+  };
+
+  # WSL: we don't use fish, avoid completion conflicts with packages like delta
+  programs.fish.enable = false;
+
   programs = {
     chromium = {
-      enable = true;
+      enable = false;  # WSL: no need for browser via home-manager
     };
 
     # firefox = {
@@ -447,17 +337,31 @@
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
-        if [[ -r "$${XDG_CACHE_HOME:-$$HOME/.cache}/p10k-instant-prompt-$${(%):-%n}.zsh" ]]; then
-          source "$${XDG_CACHE_HOME:-$$HOME/.cache}/p10k-instant-prompt-$${(%):-%n}.zsh"
+        if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
         export SILICONFLOW_API_KEY="sk-vwacmoxntfytmglrmesxghsfsprwzlhmysozdretqqpxnrnm"
         export TAVILY_API_KEY="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"
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme;
+
+        # --- PATH (from legacy ~/.profile) ---
+        export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+        # --- ROCm (AMD GPU) ---
+        export LD_LIBRARY_PATH="/opt/rocm/lib:$LD_LIBRARY_PATH"
+
+        # --- Rust / Cargo ---
+        [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+        # --- Conda (Anaconda3, managed outside nix) ---
+        if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+          . "$HOME/anaconda3/etc/profile.d/conda.sh"
+        fi
       '';
 
       # With Oh-My-Zsh:
@@ -529,6 +433,7 @@
         # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
         # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '';
+
 
       # promptInit = ''
       #   source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
