@@ -114,7 +114,7 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "copilot",
+      provider = "hermes",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -133,6 +133,12 @@ return {
             temperature = 0.75,
             max_tokens = 32768,
           },
+        },
+      },
+      acp_providers = {
+        hermes = {
+          command = "hermes",
+          args = { "acp" },
         },
       },
     },
