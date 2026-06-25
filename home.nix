@@ -306,8 +306,8 @@
       };
       completionInit = ''
         export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  # This loads nvm
-        [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
       '';
       # defaultKeymap handled in initContent via bindkey -v instead,
       # because home-manager's bindkey -a prints keybindings to stdout.
@@ -346,8 +346,8 @@
         fi
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  # This loads nvm
-        [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
         export SILICONFLOW_API_KEY="sk-vwacmoxntfytmglrmesxghsfsprwzlhmysozdretqqpxnrnm"
         export TAVILY_API_KEY="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"
