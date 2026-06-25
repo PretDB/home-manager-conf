@@ -306,10 +306,11 @@
       };
       completionInit = ''
         export NVM_DIR="$HOME/.nvm"
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
       '';
-      defaultKeymap = "vicmd";
+      # defaultKeymap handled in initContent via bindkey -v instead,
+      # because home-manager's bindkey -a prints keybindings to stdout.
 
       # [NOTE] this field seems to be useless.
       envExtra = ''
@@ -331,6 +332,9 @@
       };
 
       initContent = ''
+        # Vi mode (replaces defaultKeymap="vicmd" which generates bindkey -a spam)
+        bindkey -v
+
         source ~/.nix-profile/etc/profile.d/nix.sh
         autoload -U bashcompinit && bashcompinit
         autoload -U compinit && compinit
