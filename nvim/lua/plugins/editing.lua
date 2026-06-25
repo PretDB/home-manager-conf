@@ -35,4 +35,79 @@ return {
       { "<leader>ut", "<cmd>lua require('undotree').toggle()<cr>", desc = "UndoTree Toggle" },
     },
   },
+
+  -- folke/todo-comments.nvim
+  {
+    "folke/todo-comments.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    opts = {
+      signs = true,
+      sign_priority = 8,
+      keywords = {
+        FIX = {
+          icon = " ",
+          color = "error",
+          alt = { "ERROR", "FIXME", "BUG", "FIXIT", "ISSUE" },
+          signs = true,
+        },
+        TODO = { icon = " ", color = "info", alt = { "TASK" } },
+        HACK = { icon = " ", color = "warning", alt = { "TRICK" } },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+      },
+      gui_style = {
+        fg = "NONE",
+        bg = "BOLD",
+      },
+      merge_keywords = true,
+      highlight = {
+        multiline = true,
+        multiline_pattern = "^.",
+        multiline_context = 10,
+        before = "",
+        keyword = "wide",
+        after = "fg",
+        pattern = [[.*<(KEYWORDS)\s*:]],
+        comments_only = true,
+        max_line_len = 400,
+        exclude = {},
+      },
+      colors = {
+        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+        warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
+        info = { "DiagnosticInfo", "#2563EB" },
+        hint = { "DiagnosticHint", "#10B981" },
+        default = { "Identifier", "#7C3AED" },
+        test = { "Identifier", "#FF00FF" },
+      },
+      search = {
+        command = "rg",
+        args = {
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+        },
+        pattern = [[\b(KEYWORDS):]],
+      },
+    },
+  },
+
+  -- dhruvasagar/vim-table-mode
+  {
+    "dhruvasagar/vim-table-mode",
+  },
+
+  -- RaafatTurki/hex.nvim
+  {
+    "RaafatTurki/hex.nvim",
+  },
+
+  -- f-person/git-blame.nvim
+  {
+    "f-person/git-blame.nvim",
+  },
 }
