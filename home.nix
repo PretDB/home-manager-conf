@@ -483,5 +483,7 @@
     # LD_LIBRARY_PATH removed: nix binaries use RPATH and don't need it;
     # globally prepending nix gcc-lib breaks system tools (command-not-found
     # fails with GLIBC mismatch when apt_pkg picks up nix's libstdc++).
+    LANG = "zh_CN.UTF-8";
+    LC_ALL = "zh_CN.UTF-8";
   };
 }
