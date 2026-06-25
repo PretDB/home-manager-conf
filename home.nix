@@ -198,8 +198,8 @@
 
     neovim = {
       enable = true;
-      viAlias = true;
-      vimAlias = true;
+      viAlias = false;
+      vimAlias = false;
       withNodeJs = true;
     };
 
@@ -480,16 +480,8 @@
   #  /etc/profiles/per-user/pretdb/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
-    # GTK_IM_MODULE       = "fcitx";
-    # QT_IM_MODULE        = "fcitx";
-    # GLFW_IM_MODULE      = "ibus";
-    # # SDL_IM_MODULE       = "";
-    # XMODIFIERS          = "@im=fcitx";
-    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${
-      pkgs.lib.makeLibraryPath [ pkgs.libz ]
-    }:\$LD_LIBRARY_PATH";
-    # LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath buildInputs}:\$LD_LIBRARY_PATH";
-    # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib.outPath}/lib:\$LD_LIBRARY_PATH";
+    # LD_LIBRARY_PATH removed: nix binaries use RPATH and don't need it;
+    # globally prepending nix gcc-lib breaks system tools (command-not-found
+    # fails with GLIBC mismatch when apt_pkg picks up nix's libstdc++).
   };
 }
