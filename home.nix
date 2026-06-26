@@ -45,6 +45,14 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    # --- snacks.nvim image/math rendering dependencies ---
+    imagemagickBig
+    ghostscript
+    poppler
+    (texlive.combine {
+      inherit (texlive) scheme-basic dvipng standalone varwidth preview xcolor mathtools;
+    })
+
     bat
     cloc
     delta

@@ -28,7 +28,7 @@ return {
       },
       checkbox = {
         custom = {
-          todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+          todo = { raw = "[-]", rendered = "󰥔 ", highlight = "RenderMarkdownTodo", scope_highlight = nil },
         },
       },
     },
@@ -63,8 +63,25 @@ return {
     ft = { "mmd", "mermaid" },
   },
 
-  -- makerj/vim-pdf
+  -- kais-radwan/ascii-mermaid — ASCII rendering for terminal/SSH
   {
-    "makerj/vim-pdf",
+    "kais-radwan/ascii-mermaid",
+    ft = { "markdown", "mmd", "mermaid" },
+    config = function()
+      require("ascii-mermaid").setup({})
+    end,
+  },
+
+  -- r-pletnev/pdfreader.nvim — PDF reader with Kitty graphics support
+  {
+    "r-pletnev/pdfreader.nvim",
+    lazy = false,
+    dependencies = {
+      "folke/snacks.nvim", -- image rendering
+      "nvim-telescope/telescope.nvim", -- pickers
+    },
+    config = function()
+      require("pdfreader").setup()
+    end,
   },
 }

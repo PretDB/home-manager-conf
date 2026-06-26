@@ -692,7 +692,7 @@ return {
           "avi",
           "mkv",
           "webm",
-          "pdf",
+          -- "pdf",
         },
         force = true, -- try displaying the image, even if the terminal does not support it
         doc = {
@@ -702,9 +702,8 @@ return {
           -- render the image inline in the buffer
           -- if your env doesn't support unicode placeholders, this will be disabled
           -- takes precedence over `opts.float` on supported terminals
-          inline = true,
+          inline = false,
           -- render the image in a floating window
-          -- only used if `opts.inline` is disabled
           float = true,
           max_width = 80,
           max_height = 40,
