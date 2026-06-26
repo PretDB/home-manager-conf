@@ -610,6 +610,35 @@ return {
     },
   },
 
+  -- basedpyright: auto-detect conda or .venv
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        basedpyright = {
+          settings = {
+            python = {
+              pythonPath = function()
+                -- prefer .venv if exists
+                local venv = vim.fn.getcwd() .. "/.venv/bin/python"
+                if vim.fn.executable(venv) == 1 then
+                  return venv
+                end
+                -- fallback to CONDA_PREFIX
+                local conda = os.getenv("CONDA_PREFIX")
+                if conda then
+                  return conda .. "/bin/python"
+                end
+                -- last resort: system python
+                return vim.fn.exepath("python3") or vim.fn.exepath("python")
+              end,
+            },
+          },
+        },
+      },
+    },
+  },
+
   -- danymat/neogen
   {
     "danymat/neogen",
