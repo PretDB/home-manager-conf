@@ -610,31 +610,27 @@ return {
     },
   },
 
-  -- basedpyright: auto-detect conda or .venv
+  -- basedpyright: auto-detect conda or .venv at attach time
   {
     "neovim/nvim-lspconfig",
     opts = {
-      servers = {
-        basedpyright = {
-          settings = {
-            python = {
-              pythonPath = function()
-                -- prefer .venv if exists
-                local venv = vim.fn.getcwd() .. "/.venv/bin/python"
-                if vim.fn.executable(venv) == 1 then
-                  return venv
-                end
-                -- fallback to CONDA_PREFIX
-                local conda = os.getenv("CONDA_PREFIX")
-                if conda then
-                  return conda .. "/bin/python"
-                end
-                -- last resort: system python
-                return vim.fn.exepath("python3") or vim.fn.exepath("python")
-              end,
-            },
-          },
-        },
+      setup = {
+        basedpyright = function(_, opts)
+          -- resolve python path when LSP attaches
+          local python = nil
+          local venv = vim.fn.getcwd() .. "/.venv/bin/python"
+          if vim.fn.executable(venv) == 1 then
+            python = venv
+          else
+            local conda = os.getenv("CONDA_PREFIX")
+            if conda then python = conda .. "/bin/python" end
+          end
+          if python then
+            opts.settings = vim.tbl_deep_extend("force", opts.settings or {}, {
+              python = { pythonPath = python },
+            })
+          end
+        end,
       },
     },
   },

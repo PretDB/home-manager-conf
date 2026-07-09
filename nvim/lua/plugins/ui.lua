@@ -177,7 +177,15 @@ return {
           "filename",
         },
         lualine_c = {
-          --'%{%get(b:, "coc_symbol_line", "")%}',
+          {
+            function()
+              local reg = vim.fn.reg_recording()
+              if reg ~= "" then return "recording @" .. reg end
+              local cmd = vim.fn.getcmdline()
+              if cmd ~= "" then return cmd end
+              return ""
+            end,
+          },
         },
         lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_y = { "progress", "selectioncount", "searchcount" },
@@ -397,7 +405,7 @@ return {
           ["f"] = "fuzzy_finder",
           ["h"] = "close_node",
           ["i"] = "show_file_details", -- toggle file details
-          ["l"] = "open",
+          -- ["l"] = "open",
           ["m"] = {
             "move", -- takes text input for destination
             config = {
