@@ -137,6 +137,7 @@
     "nvim/lazyvim.json".source = ./nvim/lazyvim.json;
     "nvim/.neoconf.json".source = ./nvim/.neoconf.json;
     "nvim/stylua.toml".source = ./nvim/stylua.toml;
+    "zsh/site-functions/_delta".source = ./delta_completion.zsh;
   };
 
   # WSL: we don't use fish, avoid completion conflicts with packages like delta
@@ -350,6 +351,8 @@
 
         source ~/.nix-profile/etc/profile.d/nix.sh
         autoload -U bashcompinit && bashcompinit
+        # delta completion (deployed from ./delta_completion.zsh via xdg.configFile)
+        fpath=("$HOME/.config/zsh/site-functions" $fpath)
         autoload -U compinit && compinit
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
