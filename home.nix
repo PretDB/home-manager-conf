@@ -360,7 +360,7 @@
       # 只保留必要环境 —— 修复 Hermes 后台 wrapper 的 zle/gitstatus 误报
       # （2026-08-28：zsh -c 非交互加载完整 zshrc → gitstatus 初始化失败 → wrapper 提前退出）
       initExtraFirst = ''
-        if [[ $- != *i* ]]; then
+        if [[ $- != *i* || ! -t 0 ]]; then
           export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
           export LD_LIBRARY_PATH="/opt/rocm/lib:$LD_LIBRARY_PATH"
           return
