@@ -50,10 +50,21 @@
     ghostscript
     poppler
     (texlive.combine {
-      inherit (texlive) scheme-basic dvipng standalone varwidth preview xcolor mathtools;
+      inherit (texlive)
+        scheme-basic
+        dvipng
+        standalone
+        varwidth
+        preview
+        xcolor
+        mathtools
+        ;
     })
 
     bat
+    # btop
+    btop-cuda
+    # btop-rocm
     cloc
     delta
     dnsutils # `dig` + `nslookup`
@@ -145,7 +156,7 @@
 
   programs = {
     chromium = {
-      enable = false;  # WSL: no need for browser via home-manager
+      enable = false; # WSL: no need for browser via home-manager
     };
 
     # firefox = {
@@ -197,18 +208,18 @@
       enable = true;
     };
 
-    # kitty = {
-    #   enable = true;
-    #   settings = {
-    #     confirm_os_window_close = 1;
-    #     dynamic_background_opacity = true;
-    #     enable_audio_bell = false;
-    #     mouse_hide_wait = "-1.0";
-    #     window_padding_width = 10;
-    #     # background_opacity = "0.5";
-    #     # background_blur = 5;
-    #   };
-    # };
+    kitty = {
+      enable = true;
+      settings = {
+        confirm_os_window_close = 1;
+        dynamic_background_opacity = true;
+        enable_audio_bell = false;
+        mouse_hide_wait = "-1.0";
+        window_padding_width = 10;
+        # background_opacity = "0.5";
+        # background_blur = 5;
+      };
+    };
 
     neovim = {
       enable = true;
@@ -345,6 +356,17 @@
         enable = true;
       };
 
+      # 非交互模式（后台任务/脚本）：跳过 p10k/oh-my-zsh 等交互框架，
+      # 只保留必要环境 —— 修复 Hermes 后台 wrapper 的 zle/gitstatus 误报
+      # （2026-08-28：zsh -c 非交互加载完整 zshrc → gitstatus 初始化失败 → wrapper 提前退出）
+      initExtraFirst = ''
+        if [[ $- != *i* ]]; then
+          export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+          export LD_LIBRARY_PATH="/opt/rocm/lib:$LD_LIBRARY_PATH"
+          return
+        fi
+      '';
+
       initContent = ''
         # Vi mode (replaces defaultKeymap="vicmd" which generates bindkey -a spam)
         bindkey -v
@@ -453,7 +475,6 @@
         # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
         # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '';
-
 
       # promptInit = ''
       #   source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
