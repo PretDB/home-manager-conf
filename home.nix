@@ -397,6 +397,9 @@
         # --- ROCm (AMD GPU) ---
         export LD_LIBRARY_PATH="/opt/rocm/lib:$LD_LIBRARY_PATH"
 
+        # --- Kimi Code CLI ---
+        export PATH="$HOME/.kimi-code/bin:$PATH"
+
         # --- Rust / Cargo ---
         [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
