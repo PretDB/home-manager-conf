@@ -378,7 +378,12 @@
         # Vi mode (replaces defaultKeymap="vicmd" which generates bindkey -a spam)
         bindkey -v
 
-        source ~/.nix-profile/etc/profile.d/nix.sh
+        # nix profile script: daemon (multi-user) path first, single-user fallback
+        if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
+          source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+        elif [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+          source ~/.nix-profile/etc/profile.d/nix.sh
+        fi
         autoload -U bashcompinit && bashcompinit
         # delta completion (deployed from ./delta_completion.zsh via xdg.configFile)
         fpath=("$HOME/.config/zsh/site-functions" $fpath)
