@@ -67,6 +67,7 @@
     # btop-rocm
     cloc
     delta
+    dina-font
     dnsutils # `dig` + `nslookup`
     dotnet-sdk
     # doxygen_gui
@@ -91,12 +92,18 @@
     lua-language-server
     lua51Packages.lua
     lua51Packages.luarocks-nix
+    mplus-outline-fonts.githubRelease
     multimarkdown
     ncurses5
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.fira-code
     nix-index
     nix-output-monitor
     nix-update
     nnn
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
     oh-my-zsh
     p7zip
     pandoc
